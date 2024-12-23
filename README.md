@@ -1,10 +1,17 @@
-- 👋 Hi, I’m @fezihacker
-- 👀 I’m interested in ...
-- 🌱 I’m currently learning ...
-- 💞️ I’m looking to collaborate on ...
-- 📫 How to reach me ...
+module.exports = (req, res) => {
+  const channels = [
+    { name: 'Kanal 1', url: 'http://eu8rep.top/get.php?username=crqqx315&password=mdgkset&type=m3u_plus&output=mpegts)' },
+    { name: 'Kanal 2', url: 'http://url-e-kanalit-2.com' },
+    { name: 'Kanal 3', url: 'http://url-e-kanalit-3.com' },
+  ];
 
-<!---
-fezihacker/fezihacker is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
+  let m3uContent = '#EXTM3U\n';
+  channels.forEach(channel => {
+    m3uContent += `#EXTINF:-1, ${channel.name}\n`;
+    m3uContent += `${channel.url}\n`;
+  });
+
+  res.setHeader('Content-Type', 'audio/x-mpegurl');
+  res.setHeader('Content-Disposition', 'inline; filename="playlist.m3u"');
+  res.send(m3uContent);
+};
